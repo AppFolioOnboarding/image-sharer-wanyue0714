@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   root 'application#home'
 
   resources :feedbacks, only: [:new]
+
+  namespace :api do
+    resource :feedbacks, only: [:create]
+  end
 end
