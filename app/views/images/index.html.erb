@@ -1,0 +1,26 @@
+<div align = "center">
+  <h1>Hello, welcome to Amy's Image Sharer!</h1>
+  <!--list existing images here-->
+  <h4> Listing saved images </h4>
+  <table>
+    <th> Title </th>
+    <th> Picture </th>
+    <th> Edit </th>
+    <% @images.each do |image| %>
+        <tr>
+          <td>
+            <%= image.title %>
+          </td>
+          <td>
+            <%= image_tag(image.link, :size => "250x200") %>
+          </td>
+          <td>
+            <%= link_to 'Edit', edit_image_path(image) %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+  <br>
+  <%= link_to 'New Image', new_image_path %>
+</div>
+
