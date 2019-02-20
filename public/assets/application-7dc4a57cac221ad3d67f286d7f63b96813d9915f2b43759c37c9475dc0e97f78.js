@@ -1656,7 +1656,7 @@ Expr = Sizzle.selectors = {
 				// advance to the next closing parenthesis
 				(excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length) ) {
 
-				// excess is a negative index
+				// excess is a negative home
 				match[0] = match[0].slice( 0, excess );
 				match[2] = unquoted.slice( 0, excess );
 			}
@@ -1756,7 +1756,7 @@ Expr = Sizzle.selectors = {
 						// non-xml :nth-child(...) stores cache data on `parent`
 						if ( forward && useCache ) {
 
-							// Seek `elem` from a previously-cached index
+							// Seek `elem` from a previously-cached home
 
 							// ...in a gzip-friendly way
 							node = parent;
@@ -1785,7 +1785,7 @@ Expr = Sizzle.selectors = {
 							}
 
 						} else {
-							// Use previously-cached element index if available
+							// Use previously-cached element home if available
 							if ( useCache ) {
 								// ...in a gzip-friendly way
 								node = elem;
@@ -1813,7 +1813,7 @@ Expr = Sizzle.selectors = {
 										node.nodeType === 1 ) &&
 										++diff ) {
 
-										// Cache the index of each encountered element
+										// Cache the home of each encountered element
 										if ( useCache ) {
 											outerCache = node[ expando ] || (node[ expando ] = {});
 
@@ -2507,7 +2507,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 						}
 					}
 
-					// Discard index placeholder values to get only actual matches
+					// Discard home placeholder values to get only actual matches
 					setMatched = condense( setMatched );
 				}
 
@@ -3044,12 +3044,12 @@ jQuery.fn.extend( {
 	// the matched set of elements
 	index: function( elem ) {
 
-		// No argument, return index in parent
+		// No argument, return home in parent
 		if ( !elem ) {
 			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
-		// index in selector
+		// home in selector
 		if ( typeof elem === "string" ) {
 			return jQuery.inArray( this[ 0 ], jQuery( elem ) );
 		}
@@ -7707,7 +7707,7 @@ function propFilter( props, specialEasing ) {
 			delete props[ name ];
 
 			// not quite $.extend, this wont overwrite keys already present.
-			// also - reusing 'index' from above because we have the correct "name"
+			// also - reusing 'home' from above because we have the correct "name"
 			for ( index in value ) {
 				if ( !( index in props ) ) {
 					props[ index ] = value[ index ];
@@ -10039,7 +10039,7 @@ function buildParams( prefix, obj, traditional, add ) {
 
 			} else {
 
-				// Item is non-scalar (array or object), encode its numeric index.
+				// Item is non-scalar (array or object), encode its numeric home.
 				buildParams(
 					prefix + "[" + ( typeof v === "object" && v != null ? i : "" ) + "]",
 					v,

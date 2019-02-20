@@ -9,13 +9,13 @@ class ImageTest < ActiveSupport::TestCase
   def test_title__should_be_present
     image = Image.new(title: '',
                       link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg')
-    refute_predicate image, :valid?
+    assert_not_predicate image, :valid?
     assert_equal "can't be blank", image.errors.messages[:title].first
   end
 
   def test_link__should_be_present
     image = Image.new(title: 'piggy', link: '')
-    refute_predicate image, :valid?
+    assert_not_predicate image, :valid?
     assert_equal "can't be blank", image.errors.messages[:link].first
   end
 
@@ -31,8 +31,9 @@ class ImageTest < ActiveSupport::TestCase
     assert_not_predicate image, :valid?
   end
 
-  def test_image_url_shoul_be_valid
+  def test_image_url__shoul_be_valid
     image = Image.new(title: 'piggy', link: 'mn_16x9_992.ppp')
     assert_not_predicate image, :valid?
+    assert_equal 'is invalid URL for image', image.errors.messages[:link].first
   end
 end
