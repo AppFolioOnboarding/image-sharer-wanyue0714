@@ -1,0 +1,27 @@
+<div align = "center">
+  <h1> create your new images here </h1>
+  <!--display errors-->
+  <% if @image.errors.any?%> 
+  <ul> 
+    <% @image.errors.full_messages.each do |msg| %> 
+    <li><%= msg %></li> 
+    <% end %> 
+  </ul>
+   <% end %>
+  <%= form_for @image do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :link %>
+    <%= f.text_area :link %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end %>
+  <%= link_to 'Back to Homepage', images_path %>
+</div>
+
+
