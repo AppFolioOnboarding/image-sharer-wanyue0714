@@ -1,4 +1,5 @@
 require 'test_helper'
+
 class ImageTest < ActiveSupport::TestCase
   def test_image_valid
     image = Image.new(title: 'piggy',
