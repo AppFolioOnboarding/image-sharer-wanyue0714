@@ -17,13 +17,16 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_includes body, 'Back to Homepage'
   end
 
-  def test_should_get_show_image
+  def test_image__should_show_image
     image = Image.create!(title: 'piggy',
                           link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg')
     get image_path(image)
     assert_response :success
     assert_select 'img[src="https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg"]',
                   count: 1
+    assert_select 'img' do |img|
+      assert img[0].attributes['width'].value.to_i <= 400
+    end
   end
 
   def test_index__should_display_existing_images
