@@ -15,6 +15,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes body, 'Back to Homepage'
+    assert_select 'input#image_tag_list', count: 1
   end
 
   def test_image__should_show_image
