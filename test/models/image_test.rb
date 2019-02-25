@@ -37,4 +37,10 @@ class ImageTest < ActiveSupport::TestCase
     assert_not_predicate image, :valid?
     assert_equal 'is invalid URL for image', image.errors.messages[:link].first
   end
+
+  def test_image_seeds__should_load_twenty_images
+    Image.delete_all
+    Rails.application.load_seed
+    assert_equal Image.count, 20
+  end
 end
