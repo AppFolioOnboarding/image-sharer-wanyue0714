@@ -1,0 +1,17 @@
+<div align = "center">
+  <h1>Hello, welcome to Amy's Image Sharer!</h1>
+  <%= link_to 'Go to upload new image', new_image_path %>
+  <h2>List of existing images</h2>
+  <div>
+    <% @images.each do |f| %>
+      <p>
+        title:
+        <%= f.title %>
+      </p>
+      <p>
+        link:
+        <%= image_tag(f.link, width: '300') %>
+      </p>
+    <% end %>
+  </div>
+</div>
