@@ -42,5 +42,15 @@ class ImageTest < ActiveSupport::TestCase
     Image.delete_all
     Rails.application.load_seed
     assert_equal Image.count, 20
+    assert_equal Image.first.tag_list.count, 1
+  end
+
+  def test_image__should_taggable
+    image = Image.new(title: 'piggy',
+                      link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg',
+                      tag_list: %w[cartoon pets])
+    assert_equal image.tag_list, %w[cartoon pets]
+    image.tag_list.remove('pets')
+    assert_equal image.tag_list, ['cartoon']
   end
 end
