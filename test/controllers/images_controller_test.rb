@@ -31,7 +31,9 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select 'li', 2 do |tags|
       assert_equal tags[0].text, 'tag1'
+      assert_select tags[0], 'a[href=?]', '/images?tag=tag1'
       assert_equal tags[1].text, 'tag2'
+      assert_select tags[1], 'a[href=?]', '/images?tag=tag2'
     end
   end
 

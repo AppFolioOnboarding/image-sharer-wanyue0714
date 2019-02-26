@@ -10,7 +10,7 @@
 
   <ul>
     <% @image.tag_list.each do |tag| %>
-    <li><%= tag %></li>
+    <li><%= link_to tag, images_path(tag: tag) %></li>
     <% end %>
   </ul>
 
