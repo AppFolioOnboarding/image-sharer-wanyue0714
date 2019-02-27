@@ -6,6 +6,7 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'bin/*'
+    - 'db/migrate/*.acts_as_taggable_on_engine.rb'
   TargetRubyVersion: 2.5
 
 Layout/IndentArray:

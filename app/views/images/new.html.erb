@@ -2,7 +2,7 @@
   <h1> Upload your images here </h1>
   <% if @image.errors.any? %>
   <ul>
-    <% @image.error.full_messages.each do |msg| %>
+    <% @image.errors.full_messages.each do |msg| %>
     <li>
       <%= msg %>
     </li>
@@ -17,6 +17,10 @@
     <p>
       <%= f.label :link %>
       <%= f.text_area :link %>
+    </p>
+    <p>
+      <%= f.label :tag %>
+      <%= f.text_field :tag_list %>
     </p>
     <p>
       <%= f.submit %>

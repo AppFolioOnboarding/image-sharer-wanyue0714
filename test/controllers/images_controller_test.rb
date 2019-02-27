@@ -6,7 +6,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
                           link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg')
 
     assert_difference('Image.count') do
-      post images_path, params: { image: { title: image.title, link: image.link } }
+      post images_path, params: { image: { title: image.title, link: image.link, tag_list: image.tag_list } }
     end
   end
 
@@ -15,17 +15,23 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes body, 'Back to Homepage'
+    assert_select 'input#image_tag_list', count: 1
   end
 
   def test_image__should_show_image
     image = Image.create!(title: 'piggy',
-                          link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg')
+                          link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg',
+                          tag_list: %w[tag1 tag2])
     get image_path(image)
     assert_response :success
     assert_select 'img[src="https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg"]',
                   count: 1
     assert_select 'img' do |img|
       assert img[0].attributes['width'].value.to_i <= 400
+    end
+    assert_select 'li', 2 do |tags|
+      assert_equal tags[0].text, 'tag1'
+      assert_equal tags[1].text, 'tag2'
     end
   end
 
