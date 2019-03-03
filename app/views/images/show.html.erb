@@ -10,7 +10,9 @@
     </p>
     <p>
       Tag: <br>
-      <%= raw(@image.tag_list.map { |t| link_to t, images_path(tag: t) }.join(', ')) %>
+      <%= raw(
+            @image.tag_list.map { |t| link_to t, images_path(tag: t) }.join(', ')
+          ) %>
     </p>
     <%= link_to 'Delete',
                 image_path(@image),

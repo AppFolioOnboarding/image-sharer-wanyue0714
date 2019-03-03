@@ -1,8 +1,10 @@
 class ImagesController < ApplicationController
   def index
     @images = if image_tag_params.nil?
+                @tag_flag = false
                 Image.all.order(created_at: :desc)
               else
+                @tag_flag = true
                 ImagesFilterService.run(tag: image_tag_params)
               end
   end

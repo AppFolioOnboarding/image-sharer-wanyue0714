@@ -5,11 +5,9 @@ module PageObjects
         parent = find_parent
 
         Capybara.using_wait_time(0) do
-          begin
-            parent.find('.help-block').text
-          rescue Capybara::ElementNotFound
-            ''
-          end
+          parent.find('.help-block').text
+        rescue Capybara::ElementNotFound
+          ''
         end
       end
 
