@@ -74,4 +74,23 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  def test_image__should_destroy_image_from_homepage
+    image = Image.create!(title: 'piggy',
+                          link: 'https://s.abcnews.com/images/Lifestyle/AP_micro_pigs_1_sr_140319_mn_16x9_992.jpg',
+                          tag_list: %w[tag1 tag2])
+    assert_difference 'Image.count', -1 do
+      delete image_path(image.id)
+    end
+    assert_redirected_to images_path
+  end
+
+  def test_image__flash_notice_if_image_does_not_exist
+    assert_no_difference 'Image.count' do
+      delete image_path(1)
+    end
+    assert_equal 'Image to be deleted does not exist!', flash[:notice]
+    get image_path(1)
+    assert_equal 'Image to be displayed does not exist!', flash[:notice]
+  end
 end

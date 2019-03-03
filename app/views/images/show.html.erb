@@ -1,19 +1,22 @@
 <div align = "center">
-  <h1> Show the selected image </h1>
-  <p>
-    Title: <%= @image.title %>
-  </p>
-  <p>
-    Image: <br>
-    <%= image_tag @image.link, width: '300' %>
-  </p>
-
-  <ul>
-    <% @image.tag_list.each do |tag| %>
-    <li><%= link_to tag, images_path(tag: tag) %></li>
-    <% end %>
-  </ul>
-
-  <%= link_to 'Back to Homepage', images_path %>
+  <% if @image %>
+    <h1> Show the selected image </h1>
+    <p>
+      Title: <%= @image.title %>
+    </p>
+    <p>
+      Image: <br>
+      <%= image_tag @image.link, width: '300' %>
+    </p>
+    <p>
+      Tag: <br>
+      <%= raw(@image.tag_list.map { |t| link_to t, images_path(tag: t) }.join(', ')) %>
+    </p>
+    <%= link_to 'Delete',
+                image_path(@image),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Back to Homepage', images_path %>
+  <% end %>
 </div>
 
