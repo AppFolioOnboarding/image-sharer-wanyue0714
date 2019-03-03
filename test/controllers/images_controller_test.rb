@@ -29,26 +29,21 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'img' do |img|
       assert img[0].attributes['width'].value.to_i <= 400
     end
-    assert_select 'li', 2 do |tags|
-      assert_equal tags[0].text, 'tag1'
-      assert_select tags[0], 'a[href=?]', '/images?tag=tag1'
-      assert_equal tags[1].text, 'tag2'
-      assert_select tags[1], 'a[href=?]', '/images?tag=tag2'
-    end
+    assert_select 'a[href="/images?tag=tag1"]', count: 1
+    assert_select 'a[href="/images?tag=tag2"]', count: 1
   end
 
   def test_index__should_display_existing_images
-    tag_arr = [%w[tag01 tag02], %w[tag11], %w[tag21 tag22 tag23]]
     images = [
       { title: 'train',
         link: 'http://www.sugartours.com/images/fall-foliage-event-anchor-470x320.png',
-        tag_list: tag_arr[0] },
+        tag_list: %w[tag01 tag02] },
       { title: 'fire_bird',
         link: 'https://www.skyany.com/data/files/shuaiwei/SW011/1.jpg',
-        tag_list: tag_arr[1] },
+        tag_list: %w[tag11] },
       { title: 'plants',
         link: 'https://i.pinimg.com/originals/28/35/99/28359930ef4ee70928fe417650bbb03d.jpg',
-        tag_list: tag_arr[2] }
+        tag_list: %w[tag21 tag22 tag23] }
     ]
     Image.create!(images)
     get images_path
@@ -64,12 +59,11 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       assert_equal 'http://www.sugartours.com/images/fall-foliage-event-anchor-470x320.png',
                    image[2].attributes['src'].value
     end
-    assert_select 'ul', 3 do |tags_all|
+    tag_arr = ['tag01, tag02', 'tag11', 'tag21, tag22, tag23']
+    assert_select 'tr', 3 do |tags_all|
       tags_all.each_with_index do |tag_group, group_index|
-        assert_select tag_group, 'li' do |tags|
-          tags.each_with_index do |tag, tag_index|
-            assert_equal tag_arr[2 - group_index][tag_index], tag.text
-          end
+        assert_select tag_group, 'p' do |tags|
+          assert_equal tag_arr[2 - group_index], tags.text
         end
       end
     end
