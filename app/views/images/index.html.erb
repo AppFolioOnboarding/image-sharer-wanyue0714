@@ -2,21 +2,26 @@
   <h1>Hello, welcome to Amy's Image Sharer!</h1>
   <%= link_to 'Go to upload new image', new_image_path %>
   <h2>List of existing images</h2>
-  <div>
+  <table id="images-list">
     <% @images.each do |image| %>
-      <p>
-        title:
-        <%= image.title %>
-      </p>
-      <p>
-        link:
-        <%= image_tag(image.link, width: '300') %>
-      </p>
-      <ul>
-        <% image.tag_list.each do |tag| %>
-          <li><%= link_to tag, images_path(tag: tag) %></li>
-        <% end %>
-      </ul>
+      <tr class = "js-image-card">
+        <td>
+          title:<%= image.title %>
+        </td>
+        <td>
+          link:<%= link_to(image_tag(image.link, width: '300', class:'image-view'),
+                             image_path(image),
+                             class: 'js-image-link')%>
+        </td>
+        <td>
+          <p><%= raw(image.tag_list.map {
+            |tag_selected| link_to tag_selected, images_path(tag: tag_selected)
+          }.join(', ')) %></p>
+        </td>
+      </tr>
     <% end %>
-  </div>
+  </table>
+  <% if @tag_flag %>
+    <%= link_to('Remove Filter', images_path) %>
+  <% end %>
 </div>

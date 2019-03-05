@@ -1,15 +1,17 @@
 <div align = "center">
   <h1> Upload your images here </h1>
   <% if @image.errors.any? %>
-  <ul>
-    <% @image.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
+  <div id = "error_explanation">
+    <ul>
+      <% @image.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
-  <%= form_for @image do |f| %>
+  <%= form_for @image, url: images_path, class: 'js-image-form' do |f| %>
     <p>
       <%= f.label :title %>
       <%= f.text_field :title %>
@@ -19,7 +21,7 @@
       <%= f.text_area :link %>
     </p>
     <p>
-      <%= f.label :tag %>
+      <%= f.label :tag, 'Image Tags separated by commas' %>
       <%= f.text_field :tag_list %>
     </p>
     <p>
