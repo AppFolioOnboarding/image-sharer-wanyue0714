@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         <Header title={'Tell us what you think'} />
-        /* Put your components here: Flash Message, Form, Footer */
+        <Footer copyright={'Copyright: Appfolio Inc. Onboarding'} />
       </div>
     )
   }
