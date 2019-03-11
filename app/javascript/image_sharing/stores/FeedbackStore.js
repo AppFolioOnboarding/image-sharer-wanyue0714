@@ -1,5 +1,8 @@
+import { observable } from 'mobx';
+
 export class FeedbackStore {
-  /* Implement your feedback store*/
+  @observable userName = '';
+  @observable comments = '';
 }
 
 export default FeedbackStore;
