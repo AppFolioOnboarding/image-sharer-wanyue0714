@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
 import FeedbackForm from './FeedbackForm';
+import FlashMessage from './FlashMessage';
 
 @observer
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <div>
         <Header title={'Tell us what you think'} />
+        <FlashMessage store={feedbackStore} />
         <FeedbackForm store={feedbackStore} />
         <Footer copyright={'Copyright: Appfolio Inc. Onboarding'} />
       </div>
